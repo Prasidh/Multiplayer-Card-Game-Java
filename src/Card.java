@@ -10,4 +10,13 @@ public class Card {
 		this.value = value;
 	}
 	
+	//Getter method for a card's suit
+	public String getSuit(Card card) {
+		switch(card.suit) {
+			
+		}
+		
+		
+	}
+	
 }
