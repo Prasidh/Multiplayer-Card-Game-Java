@@ -51,7 +51,10 @@ public class gameDriver {
 			
 			//Store indexes of "randomly" drawn cards
 			for(int i = 0; i< numPlayers; i++) {
-				pickedCardsIndex.add(randNum.nextInt(56));
+				int currentCard = randNum.nextInt(56);
+				pickedCardsIndex.add(currentCard);
+				
+				System.out.println(playerNames[i] " drew the " + cardDeck.get(currentCard)).getValue() )
 			}
 			System.out.println(pickedCardsIndex);
 			
@@ -75,12 +78,13 @@ public class gameDriver {
 				}
 				else {
 					if(pickedIndexes[i] > maxIndex) {
-						
+						maxIndex = pickedIndexes[i];
+						winnerIndex = i;
 					}
 				}
 			}
 			
-			//System.out.println("THE WINNER IS " + playerNames[]);
+			System.out.println("THE WINNER IS " + playerNames[winnerIndex]);
 			
 		//}
 			

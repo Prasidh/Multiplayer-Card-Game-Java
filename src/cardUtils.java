@@ -15,6 +15,6 @@ public class cardUtils {
 		}
 		
 		//Next, we compute which of the winning indices contain the best suit
-		
+		return 0;
 	}
 }

@@ -35,8 +35,8 @@ public class Card {
 	}
 	
 	//Getter method for a card's value
-	public String getValue(Card card) {
-		switch(card.value) {
+	public String getValue() {
+		switch(this.value) {
 			case 0:
 				return "PENALTY";
 			case 1:
