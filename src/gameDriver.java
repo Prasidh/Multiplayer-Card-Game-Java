@@ -15,18 +15,30 @@ public class gameDriver {
 		Scanner strReader = new Scanner(System.in);
 		
 		//Take number of players as input
-		int numPlayers;
+		int numPlayers = -1;
 		do {
-			System.out.print("Enter number of players (2-4): " );
-			numPlayers = intReader.nextInt();
+			
+			try {
+				System.out.print("Enter number of players (2-4): " );
+				numPlayers = intReader.nextInt();
+			}catch(Exception e) {
+				intReader.next();
+				continue;
+			}
 		}while(numPlayers <2 || numPlayers >4);
 		
 		//Create unique identifiers for each player
 		String [] playerNames = new String[numPlayers];
 		for(int i = 0; i< numPlayers; i++) {
 			
-			System.out.print("Enter Player "+ (i+1) +"'s name: ");
-			playerNames[i] = strReader.nextLine();
+			try {
+				System.out.print("Enter Player "+ (i+1) +"'s name: ");
+				playerNames[i] = strReader.nextLine();
+			} catch (Exception e) {
+				strReader.next();
+				i--;
+				continue;
+			}
 		}
 		
 		//Initialize deck as ArrayList
