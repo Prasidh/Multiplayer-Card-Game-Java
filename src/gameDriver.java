@@ -15,8 +15,11 @@ public class gameDriver {
 		Scanner strReader = new Scanner(System.in);
 		
 		//Take number of players as input
-		System.out.print("Enter number of players (2-4): " );
-		int numPlayers = intReader.nextInt();
+		int numPlayers;
+		do {
+			System.out.print("Enter number of players (2-4): " );
+			numPlayers = intReader.nextInt();
+		}while(numPlayers <2 || numPlayers >4);
 		
 		//Create unique identifiers for each player
 		String [] playerNames = new String[numPlayers];
@@ -58,8 +61,11 @@ public class gameDriver {
 				
 				//Store indexes of "randomly" drawn cards
 				for(int i = 0; i< numPlayers; i++) {
-					int currentCard = randNum.nextInt(56);
-					pickedCardsIndex.add(currentCard);
+					int currentCard;
+					do {
+						currentCard = randNum.nextInt(56);
+						pickedCardsIndex.add(currentCard);
+					} while(pickedCardsIndex.size() != i+1); //ensures duplicates arent added
 					
 					if(cardDeck.get(currentCard).value != 0) {
 						System.out.println(playerNames[i] + " drew the " + cardDeck.get(currentCard).getValue() +
@@ -113,15 +119,24 @@ public class gameDriver {
 				}
 				System.out.println();
 				
-				//Check if anyone won ****************************** NEED TO FIX FOR PENALTY CASES
-				if (playerScores[winnerIndex] >= 21) {
-					//see if anyone is within a point
-					for(int i = 0; i< numPlayers; i++) {
-						if(playerScores[i] == playerScores[winnerIndex] - 1) {
+				//WIN CHECKING (Fixed)
+				int topScoreIndex = -1;
+				for(int i = 0; i<numPlayers; i++) {
+					if(i == 0) {
+						topScoreIndex = 0;
+					}
+					if(playerScores[i] > playerScores[topScoreIndex]) {
+						topScoreIndex = i;
+					}
+				}
+				if(playerScores[topScoreIndex] >= 21) {
+					for(int i = 0; i<numPlayers; i++) {
+						if(playerScores[i] == playerScores[topScoreIndex] - 1 ||
+								(playerScores[i] == playerScores[topScoreIndex] && i != topScoreIndex)) {
 							break;
 						}
 						if( i == numPlayers - 1) { //winner has been found
-							System.out.println(playerNames[winnerIndex] + " HAS WON THE GAME!!!");
+							System.out.println(playerNames[topScoreIndex] + " HAS WON THE GAME!!!");
 							break gameRunning;
 						}
 					}
