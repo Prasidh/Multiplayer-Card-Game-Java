@@ -40,53 +40,98 @@ public class gameDriver {
 		//First, generate array to store scores
 		
 		int [] playerScores = new int[numPlayers];
+		int roundCounter = 1;
 		
-		//while(true) {
+		gameRunning: {
+			while(true) {	
 			
-			//Each player draws a card randomly
-			Random randNum = new Random();
-			
-			//Hashset is used so that duplicate cards cannot be picked
-			Set<Integer> pickedCardsIndex = new LinkedHashSet<Integer>();
-			
-			//Store indexes of "randomly" drawn cards
-			for(int i = 0; i< numPlayers; i++) {
-				int currentCard = randNum.nextInt(56);
-				pickedCardsIndex.add(currentCard);
+				System.out.println("-----------------------\n"
+						+          "\tROUND " + roundCounter + "\t\n"
+								+  "-----------------------");
 				
-				System.out.println(playerNames[i] " drew the " + cardDeck.get(currentCard)).getValue() )
-			}
-			System.out.println(pickedCardsIndex);
-			
-			//Now, iterate over the indexes of cards picked
-			Iterator<Integer> itr = pickedCardsIndex.iterator();
-			
-			//First, store picked cards in array
-			int [] pickedIndexes = new int[numPlayers];
-			for(int i = 0; i< numPlayers; i++) {
-				pickedIndexes[i] = itr.next();
-			}
-			
-			//Now, we compute the max card and who has it
-			int maxIndex = -1; //stores index of winning card in cardDeck
-			int winnerIndex = -1; //stores index of winning player in playerNames
-			for(int i = 0; i<numPlayers; i++) {
 				
-				if(i == 0) {
-					maxIndex = pickedIndexes[i];
-					winnerIndex = 0;
-				}
-				else {
-					if(pickedIndexes[i] > maxIndex) {
-						maxIndex = pickedIndexes[i];
-						winnerIndex = i;
+				//Each player draws a card randomly
+				Random randNum = new Random();
+				
+				//Hashset is used so that duplicate cards cannot be picked
+				Set<Integer> pickedCardsIndex = new LinkedHashSet<Integer>();
+				
+				//Store indexes of "randomly" drawn cards
+				for(int i = 0; i< numPlayers; i++) {
+					int currentCard = randNum.nextInt(56);
+					pickedCardsIndex.add(currentCard);
+					
+					if(cardDeck.get(currentCard).value != 0) {
+						System.out.println(playerNames[i] + " drew the " + cardDeck.get(currentCard).getValue() +
+							" of " + cardDeck.get(currentCard).getSuit());
+					}else {
+						System.out.println(playerNames[i] + " drew the " + cardDeck.get(currentCard).getValue());
 					}
 				}
-			}
-			
-			System.out.println("THE WINNER IS " + playerNames[winnerIndex]);
-			
-		//}
+				
+				//Now, iterate over the indexes of cards picked
+				Iterator<Integer> itr = pickedCardsIndex.iterator();
+				
+				//First, store picked cards in array
+				int [] pickedIndexes = new int[numPlayers];
+				for(int i = 0; i< numPlayers; i++) {
+					pickedIndexes[i] = itr.next();
+				}
+				
+				//Now, we compute the max card and who has it
+				int maxIndex = -1; //stores index of winning card in cardDeck
+				int winnerIndex = -1; //stores index of winning player in playerNames
+				for(int i = 0; i<numPlayers; i++) {
+					
+					if(i == 0) {
+						maxIndex = pickedIndexes[i];
+						winnerIndex = 0;
+					}
+					else {
+						if(pickedIndexes[i] > maxIndex) {
+							maxIndex = pickedIndexes[i];
+							winnerIndex = i;
+						}
+					}
+				}
+				
+				System.out.println("The winner of round " + roundCounter+ " is " + playerNames[winnerIndex] + "!");
+				
+				//Round is over, now we compute scores
+				playerScores[winnerIndex]+=2; //winner gets 2
+				//see if anyone got penalty
+				for(int i = 0; i< numPlayers; i++) {
+					if(cardDeck.get(pickedIndexes[i]).value == 0) {
+						playerScores[i]-=1; //penalty loses a point
+					}
+				}
+				
+				System.out.println("Current Standings:");
+				//Display updated scores
+				for(int i = 0; i<numPlayers; i++) {
+					System.out.print(playerNames[i] + ": " + playerScores[i] + ", ");
+				}
+				System.out.println();
+				
+				//Check if anyone won ****************************** NEED TO FIX FOR PENALTY CASES
+				if (playerScores[winnerIndex] >= 21) {
+					//see if anyone is within a point
+					for(int i = 0; i< numPlayers; i++) {
+						if(playerScores[i] == playerScores[winnerIndex] - 1) {
+							break;
+						}
+						if( i == numPlayers - 1) { //winner has been found
+							System.out.println(playerNames[winnerIndex] + " HAS WON THE GAME!!!");
+							break gameRunning;
+						}
+					}
+				}
+				
+				roundCounter++;
+				System.out.println("Press enter to continue to next round...");
+				strReader.nextLine();
+			} //while loop
+		} //label
 			
 		intReader.close();
 		strReader.close();

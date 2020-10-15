@@ -16,8 +16,8 @@ public class Card {
 	}
 	
 	//Getter method for a card's suit
-	public String getSuit(Card card) {
-		switch(card.suit) {
+	public String getSuit() {
+		switch(this.suit) {
 			case 0:
 				return "CLUBS";
 			case 1:
