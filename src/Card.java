@@ -1,10 +1,14 @@
-
+package src;
 public class Card {
 	
 	public int suit;
 	public int value;
 	
-	//Constructor
+	//Constructors
+	public Card() {
+		this.suit = -1;
+		this.value = -1;
+	}
 	public Card(int suit, int value) {
 		
 		this.suit = suit;
@@ -34,33 +38,33 @@ public class Card {
 	public String getValue(Card card) {
 		switch(card.value) {
 			case 0:
-				return "TWO";
-			case 1:
-				return "THREE";
-			case 2:
-				return "FOUR";
-			case 3:
-				return "FIVE";
-			case 4:
-				return "SIX";
-			case 5:
-				return "SEVEN";
-			case 6:
-				return "EIGHT";
-			case 7:
-				return "NINE";
-			case 8:
-				return "TEN";
-			case 9:
-				return "JACK";
-			case 10:
-				return "QUEEN";
-			case 11:
-				return "KING";
-			case 12:
-				return "ACE";
-			case 13:
 				return "PENALTY";
+			case 1:
+				return "TWO";
+			case 2:
+				return "THREE";
+			case 3:
+				return "FOUR";
+			case 4:
+				return "FIVE";
+			case 5:
+				return "SIX";
+			case 6:
+				return "SEVEN";
+			case 7:
+				return "EIGHT";
+			case 8:
+				return "NINE";
+			case 9:
+				return "TEN";
+			case 10:
+				return "JACK";
+			case 11:
+				return "QUEEN";
+			case 12:
+				return "KING";
+			case 13:
+				return "ACE";
 			default:
 				return null;
 		}
