@@ -117,6 +117,7 @@ public class gameDriver {
 				
 				//Round is over, now we compute scores
 				playerScores[winnerIndex]+=2; //winner gets 2
+				
 				//see if anyone got penalty
 				for(int i = 0; i< numPlayers; i++) {
 					if(cardDeck.get(pickedIndexes[i]).value == 0) {
