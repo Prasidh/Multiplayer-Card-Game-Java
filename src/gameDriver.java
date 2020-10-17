@@ -77,7 +77,7 @@ public class gameDriver {
 					do {
 						currentCard = randNum.nextInt(56);
 						pickedCardsIndex.add(currentCard);
-					} while(pickedCardsIndex.size() != i+1); //ensures duplicates arent added
+					} while(pickedCardsIndex.size() != i+1); //ensures no duplicates
 					
 					if(cardDeck.get(currentCard).value != 0) {
 						System.out.println(playerNames[i] + " drew the " + cardDeck.get(currentCard).getValue() +
