@@ -8,10 +8,7 @@ Download SimpleCardGame folder
 
 ## Usage
 
-```bash
-javac gameDriver.java
-java gameDriver.java
-```
+Run gameDriver.java in the SimpleCardGame/src folder.
 
 ## Contributing
 Pull requests are welcome.
