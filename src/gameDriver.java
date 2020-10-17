@@ -133,6 +133,7 @@ public class gameDriver {
 				System.out.println();
 				
 				//WIN CHECKING (Fixed)
+				//compute which player has the highest score (may not necessarily be winner)
 				int topScoreIndex = -1;
 				for(int i = 0; i<numPlayers; i++) {
 					if(i == 0) {
@@ -142,24 +143,31 @@ public class gameDriver {
 						topScoreIndex = i;
 					}
 				}
+				//check if there is a winner
 				if(playerScores[topScoreIndex] >= 21) {
 					for(int i = 0; i<numPlayers; i++) {
+						
+						//check if there is a player within 1 point of top score
 						if(playerScores[i] == playerScores[topScoreIndex] - 1 ||
 								(playerScores[i] == playerScores[topScoreIndex] && i != topScoreIndex)) {
 							break;
 						}
-						if( i == numPlayers - 1) { //winner has been found
+						
+						//winner has been found
+						if( i == numPlayers - 1) {
 							System.out.println(playerNames[topScoreIndex] + " HAS WON THE GAME!!!");
 							break gameRunning;
 						}
 					}
 				}
 				
+				//Proceed to next round
 				roundCounter++;
 				System.out.println("Press enter to continue to next round...");
 				strReader.nextLine();
-			} //while loop
-		} //label
+				
+			} // while loop
+		} // gameRunning label
 			
 		intReader.close();
 		strReader.close();
